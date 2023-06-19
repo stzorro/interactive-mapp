@@ -1,5 +1,49 @@
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-mousewheel/3.1.13/jquery.mousewheel.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.3.0/raphael.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-mapael/2.3.0/js/jquery.mapael.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-mapael/2.3.0/js/maps/sweden_counties.min.js"></script>
+ $(document).ready(function () {
+            // Initialize the map
+            $("#map").mapael({
+                map: {
+                    name: "sweden_counties",
+                    zoom: {
+                        enabled: true,
+                        maxLevel: 10
+                    },
+                    defaultPlot: {
+                        attrs: {
+                            fill: "#FF0000",
+                            opacity: 0.6
+                        }
+                    },
+                    defaultArea: {
+                        attrs: {
+                            fill: "#B4B4B4",
+                            stroke: "#ffffff"
+                        },
+                        attrsHover: {
+                            fill: "#ebebeb"
+                        },
+                        text: {
+                            attrs: {
+                                fill: "#505444"
+                            },
+                            attrsHover: {
+                                fill: "#000000"
+                            }
+                        }
+                    }
+                },
+                plots: {
+                    // Define the tooltips for each county
+                    'plot1': { 
+                        latitude: 59.3293,
+                        longitude: 18.0686,
+                        tooltip: { content: "<strong>Stockholm</strong><br>Information about Stockholm County goes here" }
+                    },
+                    'plot2': {
+                        latitude: 55.605,
+                        longitude: 13.0038,
+                        tooltip: { content: "<strong>Skåne</strong><br>Information about Skåne County goes here" }
+                    },
+                    // Add more counties and tooltips as needed
+                }
+            });
+        });
