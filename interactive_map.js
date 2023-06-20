@@ -1,47 +1,20 @@
-$(document).ready(function() {
-  $("#map").mapael({
-    map: {
-      name: "sweden_counties",
-      zoom: {
-        enabled: true,
-        maxLevel: 10
-      },
-      defaultPlot: {
-        attrs: {
-          fill: "#FF0000",
-          opacity: 0.6
-        }
-      },
-      defaultArea: {
-        attrs: {
-          fill: "#B4B4B4",
-          stroke: "#ffffff"
-        },
-        attrsHover: {
-          fill: "#ebebeb"
-        },
-        text: {
-          attrs: {
-            fill: "#505444"
-          },
-          attrsHover: {
-            fill: "#000000"
-          }
-        }
-      }
-    },
-    plots: {
-      plot1: {
-        latitude: 59.3293,
-        longitude: 18.0686,
-        tooltip: { content: "<strong>Stockholm</strong><br>Information about Stockholm County goes here" }
-      },
-      plot2: {
-        latitude: 55.605,
-        longitude: 13.0038,
-        tooltip: { content: "<strong>Skåne</strong><br>Information about Skåne County goes here" }
-      }
-      // Add more counties and tooltips as needed
-    }
-  });
+// Initialize the map
+var map = L.map('map').setView([59.3293, 18.0686], 6);
+
+// Add the tile layer (OpenStreetMap as the base map)
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors',
+  maxZoom: 18
+}).addTo(map);
+
+// Add markers for counties
+var counties = [
+  { name: 'Stockholm', latlng: [59.3293, 18.0686], tooltip: 'Information about Stockholm County goes here' },
+  { name: 'Skåne', latlng: [55.605, 13.0038], tooltip: 'Information about Skåne County goes here' }
+  // Add more counties and tooltips as needed
+];
+
+counties.forEach(function(county) {
+  var marker = L.marker(county.latlng).addTo(map);
+  marker.bindTooltip('<strong>' + county.name + '</strong><br>' + county.tooltip);
 });
